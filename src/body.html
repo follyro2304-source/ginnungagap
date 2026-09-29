@@ -1,0 +1,348 @@
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <!-- Longhouse with crossed gable boards -->
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="M3.4 11.2 13.6 3M20.6 11.2 10.4 3"/><path d="M5.6 9.6V20.5h12.8V9.6"/><path d="M10.4 20.5v-4.6a1.6 1.6 0 0 1 3.2 0v4.6"/></symbol>
+    <!-- Shadow, accretion disk and the lensed far side of the disk -->
+    <symbol id="i-bh" viewBox="0 0 24 24"><path d="M6.6 10.4a5.9 5.9 0 0 1 10.8 0"/><circle cx="12" cy="12.6" r="3.3" fill="currentColor" stroke="none"/><path d="M2.4 13.2c0 1.6 4.3 2.9 9.6 2.9s9.6-1.3 9.6-2.9"/><path d="M2.4 13.2c0-.9 1.4-1.7 3.6-2.2M21.6 13.2c0-.9-1.4-1.7-3.6-2.2"/></symbol>
+    <!-- Eight-tooth gear -->
+    <symbol id="i-gear" viewBox="0 0 24 24"><path d="M10.48 4.96 L10.80 2.48 L13.20 2.48 L13.52 4.96 L15.91 5.95 L17.88 4.41 L19.59 6.12 L18.05 8.09 L19.04 10.48 L21.52 10.80 L21.52 13.20 L19.04 13.52 L18.05 15.91 L19.59 17.88 L17.88 19.59 L15.91 18.05 L13.52 19.04 L13.20 21.52 L10.80 21.52 L10.48 19.04 L8.09 18.05 L6.12 19.59 L4.41 17.88 L5.95 15.91 L4.96 13.52 L2.48 13.20 L2.48 10.80 L4.96 10.48 L5.95 8.09 L4.41 6.12 L6.12 4.41 L8.09 5.95Z"/><circle cx="12" cy="12" r="3"/></symbol>
+    <symbol id="i-rail" viewBox="0 0 24 24"><rect x="3.5" y="4.5" width="17" height="15" rx="2.5"/><path d="M9 4.5v15"/><path d="m13.2 9.6 2.4 2.4-2.4 2.4"/></symbol>
+    <symbol id="i-sliders" viewBox="0 0 24 24"><path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="17" r="2"/><path d="M4 12h14"/><circle cx="18.5" cy="12" r="1.2" fill="currentColor"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="M6.5 6.5l11 11M17.5 6.5l-11 11"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.8v12.4a.6.6 0 0 0 .9.5l9.6-6.2a.6.6 0 0 0 0-1L8.9 5.3a.6.6 0 0 0-.9.5Z"/></symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24"><path d="M8.5 5.5v13M15.5 5.5v13"/></symbol>
+    <symbol id="i-reset" viewBox="0 0 24 24"><path d="M5.2 13.2A7 7 0 1 0 7.4 7"/><path d="M4.6 4.4 7.4 7l-3 1.7"/><circle cx="12" cy="12" r="1.3" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-orbit" viewBox="0 0 24 24"><ellipse cx="12" cy="12" rx="9" ry="3.6"/><circle cx="12" cy="12" r="2.2" fill="currentColor" stroke="none"/><circle cx="20.2" cy="10.6" r="1.1" fill="currentColor" stroke="none"/></symbol>
+    <!-- Grid lines sagging into a gravity well beneath a small mass -->
+    <symbol id="i-space" viewBox="0 0 24 24"><path d="M2.5 9.5c3.2 0 5.3.5 6.7 2.3 1 1.3 1.7 3 2.8 3s1.8-1.7 2.8-3c1.4-1.8 3.5-2.3 6.7-2.3"/><path d="M2.5 15c3 0 5 .3 6.4 1.2 1.1.7 2 1.5 3.1 1.5s2-.8 3.1-1.5c1.4-.9 3.4-1.2 6.4-1.2"/><path d="M8.2 20.5c.5-3 1.6-5.7 3.8-5.7s3.3 2.7 3.8 5.7"/><circle cx="12" cy="6" r="2.1" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-swap" viewBox="0 0 24 24"><path d="M5 8.5h13.5M15 5l3.5 3.5L15 12"/><path d="M19 15.5H5.5M9 12l-3.5 3.5L9 19"/></symbol>
+  </defs>
+</svg>
+
+<div class="gl-error" id="glError" hidden><div><h2>WebGL 2 is not available</h2><p id="glErrorMsg">This simulation needs WebGL 2. Turn on hardware acceleration in your browser settings, or open the page in a current version of Chrome, Edge, Firefox or Safari.</p></div></div>
+<canvas id="gl" tabindex="-1" aria-label="Rendered view of a black hole and the Milky Way"></canvas>
+
+<nav class="rail" id="rail" data-open="false" aria-label="Main">
+  <div class="brand" aria-hidden="true">
+    <svg viewBox="0 0 24 24"><path d="M9.2 3.2a9 9 0 0 0 0 17.6" stroke="#B5CDFF"/><path d="M14.8 3.2a9 9 0 0 1 0 17.6" stroke="#FFB46B"/><circle cx="12" cy="12" r="1.5" fill="#E4E9F1" stroke="none"/></svg>
+    <span class="brand-word">Ginnungagap</span>
+  </div>
+  <button class="nav-btn" data-route="home" aria-current="page"><svg class="ic"><use href="#i-home"/></svg><span class="nav-label">Home</span><span class="tip">Home</span></button>
+  <button class="nav-btn" data-route="black-hole"><svg class="ic"><use href="#i-bh"/></svg><span class="nav-label">Black hole</span><span class="tip">Black hole</span></button>
+  <button class="nav-btn" data-route="spacetime"><svg class="ic"><use href="#i-space"/></svg><span class="nav-label">Spacetime</span><span class="tip">Spacetime around Earth</span></button>
+  <div class="rail-spacer"></div>
+  <button class="nav-btn" id="railToggle" aria-expanded="false" aria-controls="rail"><svg class="ic"><use href="#i-rail"/></svg><span class="nav-label">Collapse</span><span class="tip">Expand sidebar</span></button>
+  <button class="nav-btn" id="openSettings" aria-haspopup="dialog"><svg class="ic"><use href="#i-gear"/></svg><span class="nav-label">Settings</span><span class="tip">Settings</span></button>
+</nav>
+
+<!-- ===================== Home ===================== -->
+<section class="page" id="page-home" aria-labelledby="homeTitle">
+  <div class="home" id="homeScroll">
+    <h1 class="sr-only" id="homeTitle">Ginnungagap</h1>
+    <div class="title-fallback" aria-hidden="true">Ginnungagap</div>
+    <div class="home-body">
+      <div class="home-inner">
+        <p class="home-caption" id="homeCaption">The dark point in the title is a live Schwarzschild black hole. Its gravity bends the light of the letters and of the Milky Way behind them.</p>
+        <div class="home-cols">
+          <section>
+            <h2>The name</h2>
+            <p>In Norse cosmology, Ginnungagap is the void that existed before anything else. Snorri Sturluson’s <i>Prose Edda</i> (c. 1220) places it between Niflheim, a world of ice and mist in the north, and Muspelheim, a world of fire in the south.</p>
+            <p>Rime from the north crept into the gap. Where it met the heat of the south it thawed, and from the dripping meltwater came Ymir, the first being. The gods later built the world from his body and set it in the middle of the gap.</p>
+            <p>The older poem <i>Völuspá</i> recalls that moment in one line: <span class="onn" lang="non">gap var ginnunga, en gras hvergi</span> (“there was a yawning gap, and grass nowhere”). The meaning of <span class="onn" lang="non">ginnunga</span> is still debated. It may come from a root meaning “to gape”, from one meaning “to deceive”, or from the prefix <span class="onn" lang="non">ginn-</span>, which marks things as vast and charged with power.</p>
+          </section>
+          <section>
+            <h2>The project</h2>
+            <p>Ginnungagap is a laboratory for the physics of extreme places, built so you can see what the equations predict instead of only reading them.</p>
+            <p>Every image is computed from physical law. Light is traced along geodesics of curved spacetime, gas glows at the temperature the theory assigns it, and the numbers beside each view come from the same equations that draw it.</p>
+            <p>The first module is a Schwarzschild black hole with a thin accretion disk. You can change its mass, move around it, and switch individual relativistic effects on and off to see how each one shapes the picture.</p>
+            <p>The second puts Earth and the Moon where they are right now, at true scale, and draws the curvature of spacetime around them. Add planets or spacecraft, and compare how fast clocks tick in different places.</p>
+          </section>
+        </div>
+        <div class="home-bridge">
+          <p>The name fits. Just outside the horizon, gas in the disk reaches millions of kelvin, while the horizon itself radiates at about 60 billionths of a kelvin for a black hole of one solar mass. Fire and ice, at the edge of a void.</p>
+          <div class="cta-row"><a class="cta" href="#/black-hole"><svg class="ic"><use href="#i-bh"/></svg>Open the black hole simulation</a><a class="cta cta-rime" href="#/spacetime"><svg class="ic"><use href="#i-space"/></svg>Explore spacetime around Earth</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== Black hole ===================== -->
+<section class="page" id="page-bh" hidden aria-label="Black hole simulation">
+  <div class="hud" id="hud">
+    <button class="chip" id="playBtn" aria-label="Pause disk motion"><svg class="ic"><use href="#i-pause"/></svg><span>Pause</span></button>
+    <button class="chip" id="resetView" aria-label="Reset view"><svg class="ic"><use href="#i-reset"/></svg><span>Reset view</span></button>
+    <span class="chip hint-chip" id="hintChip">Drag to orbit, scroll or pinch to zoom, arrow keys also work</span>
+    <span class="chip fps" id="fpsChip" hidden>— fps</span>
+  </div>
+  <button class="chip insp-open-btn" id="inspOpen" hidden aria-controls="insp"><svg class="ic"><use href="#i-sliders"/></svg><span>Properties</span></button>
+
+  <aside class="insp" id="insp" aria-label="Black hole properties">
+    <div class="insp-head">
+      <div class="insp-title">
+        <h2>Schwarzschild black hole</h2>
+        <button class="icon-btn" id="inspClose" aria-label="Hide properties panel"><svg class="ic"><use href="#i-close"/></svg></button>
+      </div>
+      <p class="insp-sub">Non-rotating and uncharged, fed by a geometrically thin accretion disk.</p>
+      <div class="presets" id="presets" role="group" aria-label="Known black holes"></div>
+      <p class="preset-note" id="presetNote"></p>
+    </div>
+    <div class="insp-scroll">
+      <details class="grp" open>
+        <summary>Black hole</summary>
+        <div class="grp-body">
+          <div class="ctl ember-ctl">
+            <div class="ctl-row"><label for="massRange">Mass</label><span><input class="mass-in" id="massInput" inputmode="decimal" aria-label="Mass in solar masses"> <span class="lbl">M<sub>☉</sub></span></span></div>
+            <input type="range" id="massRange" min="0" max="11" step="0.01" aria-describedby="massHint">
+            <p class="hint" id="massHint">Enter any value, for example 4.3e6.</p>
+          </div>
+          <div class="ctl ember-ctl">
+            <div class="ctl-row"><label for="mdotRange">Accretion rate</label><output id="mdotOut"></output></div>
+            <input type="range" id="mdotRange" min="-3" max="0" step="0.01">
+          </div>
+        </div>
+      </details>
+
+      <details class="grp" open>
+        <summary>Accretion disk</summary>
+        <div class="grp-body">
+          <div class="ctl ember-ctl">
+            <div class="ctl-row"><label for="doutRange">Outer edge</label><output id="doutOut"></output></div>
+            <input type="range" id="doutRange" min="5" max="40" step="0.5">
+          </div>
+          <div class="ctl">
+            <div class="ctl-row"><span class="lbl" id="cmodeLbl">Colour</span></div>
+            <div class="seg" role="radiogroup" aria-labelledby="cmodeLbl" id="cmodeSeg">
+              <button role="radio" data-v="visible">Shifted into visible</button>
+              <button role="radio" data-v="true">True colour</button>
+            </div>
+            <p class="hint" id="cmodeHint"></p>
+          </div>
+          <div class="ctl ember-ctl" id="tdispCtl">
+            <div class="ctl-row"><label for="tdispRange">Peak colour temperature</label><output id="tdispOut"></output></div>
+            <input type="range" id="tdispRange" min="2500" max="20000" step="50">
+          </div>
+          <div class="ctl ember-ctl">
+            <div class="ctl-row"><label for="rateRange">Animation speed</label><output id="rateOut"></output></div>
+            <input type="range" id="rateRange" min="0" max="30" step="0.5">
+            <p class="hint" id="rateHint"></p>
+          </div>
+        </div>
+      </details>
+
+      <details class="grp" open>
+        <summary>Relativistic effects</summary>
+        <div class="grp-body" id="effects"></div>
+      </details>
+
+      <details class="grp" open>
+        <summary>Observer</summary>
+        <div class="grp-body">
+          <div class="ctl">
+            <div class="ctl-row"><label for="distRange">Distance</label><output id="distOut"></output></div>
+            <input type="range" id="distRange" min="0" max="1" step="0.001">
+          </div>
+          <div class="ctl">
+            <div class="ctl-row"><label for="fovRange">Field of view</label><output id="fovOut"></output></div>
+            <input type="range" id="fovRange" min="20" max="110" step="1">
+          </div>
+          <div class="ctl">
+            <div class="ctl-row"><label for="expRange">Exposure</label><output id="expOut"></output></div>
+            <input type="range" id="expRange" min="-4" max="4" step="0.1">
+          </div>
+          <div class="ctl">
+            <div class="ctl-row"><label for="skyRange">Background brightness</label><output id="skyOut"></output></div>
+            <input type="range" id="skyRange" min="0" max="3" step="0.05">
+          </div>
+          <div class="tg"><div><span class="k" id="autoLbl">Orbit automatically</span><span class="d">Circle the black hole slowly at the current distance.</span></div><button class="sw" role="switch" id="autoOrbit" aria-labelledby="autoLbl"></button></div>
+          <div class="dom-rime" id="roObserver"></div>
+        </div>
+      </details>
+
+      <details class="grp dom-rime" open>
+        <summary>Geometry</summary>
+        <div class="grp-body" id="roGeometry"></div>
+      </details>
+
+      <details class="grp dom-rime">
+        <summary>Horizon and thermodynamics</summary>
+        <div class="grp-body" id="roThermo"></div>
+      </details>
+
+      <details class="grp dom-ember">
+        <summary>Accretion physics</summary>
+        <div class="grp-body" id="roAccretion"></div>
+      </details>
+
+      <details class="grp dom-rime" id="earthGrp">
+        <summary>Seen from Earth</summary>
+        <div class="grp-body" id="roEarth"></div>
+      </details>
+
+      <p class="note">Lengths in the view are measured in Schwarzschild radii, so the picture itself does not depend on mass. Mass sets the physical scale, the temperature of the disk, and how fast its clock runs.</p>
+    </div>
+  </aside>
+
+  
+</section>
+
+<!-- ===================== Spacetime ===================== -->
+<section class="page" id="page-space" hidden aria-label="Spacetime around Earth">
+  <div class="sp-labels" id="spLabels"></div>
+  <div class="hud sp-hud" id="spHud">
+    <div class="sp-hud-row">
+      <button class="chip" id="spPlay" aria-label="Pause time"><svg class="ic"><use href="#i-pause"/></svg><span>Pause</span></button>
+      <label class="chip sp-rate"><span class="sr-only">Time speed</span><select id="spRate"></select></label>
+      <output class="chip sp-date" id="spDate" aria-live="off"></output>
+      <button class="chip" id="spNow">Now</button>
+    </div>
+    <div class="sp-hud-row">
+      <div class="seg sp-seg" role="radiogroup" aria-label="Spacetime grid" id="spGridSeg">
+        <button role="radio" data-v="none">No grid</button><button role="radio" data-v="2d">2D grid</button><button role="radio" data-v="3d">3D grid</button>
+      </div>
+      <div class="seg sp-seg" role="radiogroup" aria-label="Look at" id="spFocusSeg">
+        <button role="radio" data-v="earth">Earth</button><button role="radio" data-v="moon">Moon</button><button role="radio" data-v="em" title="Centre of mass of Earth and everything orbiting it">Earth system</button>
+      </div>
+    </div>
+    <p class="sp-limit" id="spLimit" hidden></p>
+  </div>
+  <div class="sp-toast" id="spToast" role="status" aria-live="polite" hidden></div>
+  <button class="chip insp-open-btn" id="spInspOpen" hidden aria-controls="spInsp"><svg class="ic"><use href="#i-sliders"/></svg><span>Bodies and clocks</span></button>
+  <aside class="insp sp-insp" id="spInsp" aria-label="Bodies, additions and clocks">
+    <div class="insp-head">
+      <div class="insp-title">
+        <h2>Earth and Moon</h2>
+        <button class="icon-btn" id="spInspClose" aria-label="Hide panel"><svg class="ic"><use href="#i-close"/></svg></button>
+      </div>
+      <p class="insp-sub">Real positions for the date shown. Masses, sizes and distances are true to scale, so most bodies are specks. Click a name to fly to it, drag to orbit, scroll or pinch to zoom.</p>
+      <div class="sp-tabs" role="tablist" id="spTabs">
+        <button class="tab" role="tab" id="spTabBtnBodies" aria-controls="spTabBodies" aria-selected="true">Bodies</button>
+        <button class="tab" role="tab" id="spTabBtnAdd" aria-controls="spTabAdd" aria-selected="false" tabindex="-1">Add a body</button>
+        <button class="tab" role="tab" id="spTabBtnClocks" aria-controls="spTabClocks" aria-selected="false" tabindex="-1">Clocks</button>
+      </div>
+    </div>
+    <div class="insp-scroll">
+      <div role="tabpanel" id="spTabBodies" aria-labelledby="spTabBtnBodies">
+        <details class="grp dom-rime" open>
+          <summary>Spacetime grid</summary>
+          <div class="grp-body">
+            <p class="sp-lead">The sheet dips where clocks run slow. Its depth at each point is the gravitational potential Φ, the part of spacetime’s curvature that steers slow-moving bodies like the Moon: <i>g<sub>tt</sub></i> = −(1 + 2Φ/c²).</p>
+            <p class="sp-lead">The real dip is tiny. At Earth’s surface clocks lose 0.7 parts per billion, so the depth is scaled up until you can see it. Depth is measured from the sheet’s outer edge, since only differences in potential matter. Wells narrower than the grid spacing are smoothed to that spacing; zoom in to see their true shape.</p>
+            <p class="sp-lead">Zoom far out and the sheet turns into a saddle, dipping toward and away from the Sun. That is the Sun’s tide, the same stretching that raises ocean tides. Beyond about 1.5 million km it outweighs Earth’s own pull, which is why nothing can orbit Earth farther out than that.</p>
+            <div class="ctl">
+              <div class="ctl-row"><label for="spDepth">Depth exaggeration</label><output id="spDepthOut"></output></div>
+              <input type="range" id="spDepth" min="-1" max="0.7" step="0.01" aria-describedby="spDepthScale">
+              <p class="hint" id="spDepthScale"></p>
+              <p class="hint">At ×1 the deepest well fills about a third of the view. Move right for deeper, steeper wells; double-click the slider to return to ×1.</p>
+            </div>
+            <div class="tg"><div><span class="k" id="spDepthHoldL">Hold scale while zooming</span><span class="d">Keep the same kilometres per part per billion as you zoom, to compare wells fairly. Wells then look deeper close up and shallower from afar.</span></div><button class="sw" role="switch" id="spDepthHold" aria-labelledby="spDepthHoldL"></button></div>
+          </div>
+        </details>
+        <details class="grp">
+          <summary>View</summary>
+          <div class="grp-body">
+            <div class="tg"><div><span class="k" id="spCloudsL">Clouds</span><span class="d">A drifting cloud layer, generated to match typical weather belts.</span></div><button class="sw" role="switch" id="spClouds" aria-labelledby="spCloudsL"></button></div>
+            <div class="tg"><div><span class="k" id="spCityL">City lights</span><span class="d">Night-side lights of 34,000 cities, sized by population.</span></div><button class="sw" role="switch" id="spCity" aria-labelledby="spCityL"></button></div>
+            <div class="tg"><div><span class="k" id="spLabelsL">Labels</span><span class="d">Names beside each body. Click one to fly there.</span></div><button class="sw" role="switch" id="spLabelsSw" aria-labelledby="spLabelsL"></button></div>
+            <div class="ctl">
+              <div class="ctl-row"><label for="spEv">Exposure</label><output id="spEvOut"></output></div>
+              <input type="range" id="spEv" min="-3" max="8" step="0.1">
+              <p class="hint">Raise it to see earthshine on the Moon’s night side, or faint planets. Faraway planets receive far less sunlight, so their lighting is brightened to match Earth’s while you look at them.</p>
+            </div>
+          </div>
+        </details>
+        <div class="sp-cards" id="spCards"></div>
+        <p class="note">Motion is computed from Newton’s gravity plus the first relativistic correction, starting from ephemerides for the present date. Earth’s surface and clouds are generated from real coastlines and climate zones rather than photographs.</p>
+        <p class="sp-credit">City data: GeoNames (CC BY 4.0). Coastlines: NOAA GLOBE land mask.</p>
+      </div>
+      <div role="tabpanel" id="spTabAdd" aria-labelledby="spTabBtnAdd" hidden>
+        <div class="sp-place">
+          <div class="ctl">
+            <div class="ctl-row"><span class="lbl" id="spPlaceL">Planets appear</span></div>
+            <div class="seg" role="radiogroup" aria-labelledby="spPlaceL" id="spPlaceSeg">
+              <button role="radio" data-v="real">Where they are today</button><button role="radio" data-v="whatif">Next to Earth</button>
+            </div>
+          </div>
+          <div class="ctl">
+            <div class="ctl-row"><label for="spPlaceDist">Distance for next-to-Earth</label></div>
+            <input type="range" id="spPlaceDist" min="4.3" max="6.7" step="0.01">
+            <p class="hint" id="spPlaceOut"></p>
+          </div>
+        </div>
+        <div class="sp-cat" id="spCat"></div>
+      </div>
+      <div role="tabpanel" id="spTabClocks" aria-labelledby="spTabBtnClocks" hidden>
+        <p class="sp-lead">Two perfect clocks start together. Gravity and speed make them tick at slightly different rates, and the gap grows as simulated time runs.</p>
+        <div class="sp-presets" id="spPresets" role="group" aria-label="Clock pairs">
+          <button class="preset" data-pair="earth,gps">Ground and GPS</button>
+          <button class="preset" data-pair="earth,iss">Ground and ISS</button>
+          <button class="preset" data-pair="earth,moon">Earth and Moon</button>
+        </div>
+        <div class="sp-pick">
+          <label class="sp-sel"><span>Clock A</span><select id="spClockA"></select></label>
+          <button class="icon-btn" id="spClockSwap" aria-label="Swap clocks"><svg class="ic"><use href="#i-swap"/></svg></button>
+          <label class="sp-sel"><span>Clock B</span><select id="spClockB"></select></label>
+        </div>
+        <div class="sp-diff">
+          <div class="sp-diff-big" id="spDiffBig">+0 ns</div>
+          <div class="sp-diff-cap" id="spDiffCap"></div>
+          <div class="sp-diff-rate" id="spRateTxt"></div>
+        </div>
+        <canvas class="sp-spark" id="spSpark" aria-hidden="true"></canvas>
+        <p class="sp-spark-l" id="spSparkL"></p>
+        <h3 class="sp-h3">Why they differ</h3>
+        <p class="hint">Each bar is how much slower a clock ticks than one at rest far away. Deeper in a gravity well is slower, and so is faster motion.</p>
+        <div class="sp-cbars" id="spClockBars"></div>
+        <p class="hint" id="spLightTxt"></p>
+        <p class="hint" id="spClockFrame"></p>
+        <button class="btn sp-reset" id="spClockReset">Restart both clocks</button>
+      </div>
+    </div>
+  </aside>
+</section>
+<!-- ===================== Settings ===================== -->
+<div class="modal-wrap" id="settings" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="settingsTitle">
+    <div class="modal-head">
+      <h2 id="settingsTitle">Settings</h2>
+      <button class="icon-btn" id="closeSettings" aria-label="Close settings"><svg class="ic"><use href="#i-close"/></svg></button>
+    </div>
+    <div class="tabs" role="tablist">
+      <button class="tab" role="tab" id="tab-gfx" aria-controls="panel-gfx" aria-selected="true">Graphics</button>
+      <button class="tab" role="tab" id="tab-ui" aria-controls="panel-ui" aria-selected="false" tabindex="-1">Interface</button>
+    </div>
+    <div class="modal-body">
+      <div role="tabpanel" id="panel-gfx" aria-labelledby="tab-gfx">
+        <div class="mode-row">
+          <p id="gfxModeText">Pick the quality level that suits your hardware. Changes apply immediately.</p>
+          <div class="seg" role="radiogroup" aria-label="Graphics options view" id="gfxMode">
+            <button role="radio" data-v="simple" aria-checked="true">Simple</button>
+            <button role="radio" data-v="advanced" aria-checked="false">Advanced</button>
+          </div>
+        </div>
+        <div id="gfxSimple">
+          <div class="tiers" role="radiogroup" aria-label="Quality level" id="tiers"></div>
+          <div class="tg"><div><span class="k" id="dynLbl1">Adaptive resolution</span><span class="d">Lower the render resolution when the frame rate drops, and raise it again when there is headroom.</span></div><button class="sw" role="switch" data-set="dynRes" aria-labelledby="dynLbl1"></button></div>
+        </div>
+        <div id="gfxAdvanced" hidden>
+          <p class="custom-flag" id="customFlag" hidden>Custom settings. Choose a level under Simple to return to a preset.</p>
+          <div class="adv-grid" id="advGrid"></div>
+        </div>
+      </div>
+      <div role="tabpanel" id="panel-ui" aria-labelledby="tab-ui" hidden>
+        <div class="tg"><div><span class="k" id="uiFpsLbl">Show frame rate</span><span class="d">Display frames per second and render resolution in the simulation.</span></div><button class="sw" role="switch" data-set="showFps" aria-labelledby="uiFpsLbl"></button></div>
+        <div class="tg"><div><span class="k" id="uiHintLbl">Show control hints</span><span class="d">Explain mouse, touch and keyboard controls at the bottom of the simulation.</span></div><button class="sw" role="switch" data-set="showHints" aria-labelledby="uiHintLbl"></button></div>
+        <div class="tg"><div><span class="k" id="uiMotionLbl">Reduce motion</span><span class="d">Stop the drifting camera on the home page and the automatic orbit. Follows your system setting by default.</span></div><button class="sw" role="switch" data-set="reduceMotion" aria-labelledby="uiMotionLbl"></button></div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <span class="foot-info" id="gpuInfo"></span>
+      <div class="foot-btns">
+        <button class="btn" id="resetGfx">Use recommended</button>
+        <button class="btn primary" id="doneSettings">Done</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="loader" id="loader" hidden role="status" aria-live="polite"><span id="loaderText">Charting the sky</span><span class="bar"><i id="loaderBar"></i></span></div>
