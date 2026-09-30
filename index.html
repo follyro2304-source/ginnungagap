@@ -240,6 +240,41 @@ input[type=range]:disabled{opacity:.35}
 @keyframes fade{from{opacity:0}to{opacity:1}}
 @keyframes rise{from{opacity:0;transform:translateY(8px) scale(.985)}to{opacity:1;transform:none}}
 
+/* ---------- Feedback and GitHub buttons ---------- */
+.fab-stack{position:fixed;z-index:50;right:calc(16px + env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));
+  display:flex;flex-direction:column;gap:10px;transition:right .3s var(--ease),bottom .3s var(--ease)}
+.fab{position:relative;display:grid;place-items:center;width:44px;height:44px;border-radius:50%;padding:0;background:var(--glass);
+  -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border:1px solid var(--hair-strong);color:var(--frost);text-decoration:none;
+  transition:border-color .15s,background .15s,transform .15s}
+.fab:hover{border-color:var(--rime);background:var(--glass-strong);transform:translateY(-1px)}
+.fab .ic{width:20px;height:20px}
+.fab .tip{position:absolute;right:calc(100% + 8px);top:50%;padding:6px 10px;border-radius:8px;background:var(--glass-strong);white-space:nowrap;
+  border:1px solid var(--hair-strong);color:var(--frost);font-size:13px;pointer-events:none;opacity:0;transform:translate(4px,-50%);transition:opacity .15s,transform .15s}
+.fab:hover .tip,.fab:focus-visible .tip{opacity:1;transform:translate(0,-50%)}
+/* Keep clear of an open properties panel on the simulation pages */
+body:has(.page:not([hidden]) > .insp:not([data-hidden="true"])) .fab-stack{right:calc(var(--insp-w) + 16px)}
+
+.fb-modal{grid-template-rows:auto 1fr auto;margin:0}
+.fb-modal-sm{width:min(520px,100%)}
+.fb-label{display:block;margin:0 0 8px;font-size:14px;color:var(--ash)}
+.fb-text,.fb-input{width:100%;padding:10px 12px;border-radius:10px;border:1px solid var(--hair-strong);background:rgba(2,4,10,.55);color:var(--frost);font:inherit}
+.fb-text{resize:vertical;min-height:120px;line-height:1.5}
+.fb-text:focus,.fb-input:focus{outline:none;border-color:var(--rime)}
+.fb-status{min-height:1.5em;margin:10px 0 0;font-size:13.5px;color:var(--ash)}
+.fb-status[data-kind="ok"]{color:var(--rime)}
+.fb-status[data-kind="err"]{color:var(--ember)}
+.adm-row{display:flex;gap:8px}
+.adm-row .fb-input{flex:1;min-width:0}
+.adm-list{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:10px}
+.adm-item{padding:12px 14px;border-radius:12px;border:1px solid var(--hair);background:rgba(181,205,255,.03)}
+.adm-meta{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:6px;font-size:12.5px;color:var(--ash)}
+.adm-msg{margin:0;white-space:pre-wrap;overflow-wrap:anywhere;color:var(--frost)}
+.adm-del{height:28px;padding:0 10px;border-radius:8px;border:1px solid transparent;background:none;color:var(--ash);font-size:12.5px}
+.adm-del:hover{color:var(--ember);border-color:var(--hair-strong)}
+.home .home-admin{margin:64px auto 0;text-align:center;font:400 12.5px/1 var(--sans)}
+.home-admin a{color:var(--ash);text-decoration:none;opacity:.7}
+.home-admin a:hover{opacity:1;text-decoration:underline}
+
 /* ---------- Responsive ---------- */
 @media (max-width:980px){ :root{--insp-w:330px} .tiers{grid-template-columns:repeat(2,minmax(0,1fr))} }
 @media (max-width:760px){
@@ -254,6 +289,9 @@ input[type=range]:disabled{opacity:.35}
   .hud .hint-chip{display:none}
   .adv-grid{grid-template-columns:1fr}
   .modal-foot{flex-wrap:wrap}
+  .fab{width:40px;height:40px}
+  .fab .tip{display:none}
+  body:has(.page:not([hidden]) > .insp:not([data-hidden="true"])) .fab-stack{right:calc(12px + env(safe-area-inset-right,0px));bottom:calc(min(56dvh,540px) + 12px)}
 }
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
@@ -386,6 +424,9 @@ select option{background:#0B1020;color:#E4E9F1}
     <!-- Grid lines sagging into a gravity well beneath a small mass -->
     <symbol id="i-space" viewBox="0 0 24 24"><path d="M2.5 9.5c3.2 0 5.3.5 6.7 2.3 1 1.3 1.7 3 2.8 3s1.8-1.7 2.8-3c1.4-1.8 3.5-2.3 6.7-2.3"/><path d="M2.5 15c3 0 5 .3 6.4 1.2 1.1.7 2 1.5 3.1 1.5s2-.8 3.1-1.5c1.4-.9 3.4-1.2 6.4-1.2"/><path d="M8.2 20.5c.5-3 1.6-5.7 3.8-5.7s3.3 2.7 3.8 5.7"/><circle cx="12" cy="6" r="2.1" fill="currentColor" stroke="none"/></symbol>
     <symbol id="i-swap" viewBox="0 0 24 24"><path d="M5 8.5h13.5M15 5l3.5 3.5L15 12"/><path d="M19 15.5H5.5M9 12l-3.5 3.5L9 19"/></symbol>
+    <!-- Speech bubble with a quill stroke -->
+    <symbol id="i-feedback" viewBox="0 0 24 24"><path d="M4.5 5.5h15a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H10l-4.5 3.5v-3.5h-1a1 1 0 0 1-1-1v-9a1 1 0 0 1 1-1Z"/><path d="M8 10h8M8 13h5"/></symbol>
+    <symbol id="i-github" viewBox="0 0 16 16"><path fill="currentColor" stroke="none" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></symbol>
   </defs>
 </svg>
 
@@ -432,6 +473,7 @@ select option{background:#0B1020;color:#E4E9F1}
           <p>The name fits. Just outside the horizon, gas in the disk reaches millions of kelvin, while the horizon itself radiates at about 60 billionths of a kelvin for a black hole of one solar mass. Fire and ice, at the edge of a void.</p>
           <div class="cta-row"><a class="cta" href="#/black-hole"><svg class="ic"><use href="#i-bh"/></svg>Open the black hole simulation</a><a class="cta cta-rime" href="#/spacetime"><svg class="ic"><use href="#i-space"/></svg>Explore spacetime around Earth</a></div>
         </div>
+        <p class="home-admin"><a href="#" id="adminLink">Admin</a></p>
       </div>
     </div>
   </div>
@@ -710,6 +752,60 @@ select option{background:#0B1020;color:#E4E9F1}
       <div class="foot-btns">
         <button class="btn" id="resetGfx">Use recommended</button>
         <button class="btn primary" id="doneSettings">Done</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== Feedback ===================== -->
+<div class="fab-stack" id="fabStack">
+  <a class="fab" href="https://github.com/follyro2304-source/ginnungagap" target="_blank" rel="noopener" aria-label="Source code on GitHub"><svg class="ic"><use href="#i-github"/></svg><span class="tip">View on GitHub</span></a>
+  <button class="fab" id="openFeedback" aria-haspopup="dialog" aria-label="Send feedback"><svg class="ic"><use href="#i-feedback"/></svg><span class="tip">Send feedback</span></button>
+</div>
+
+<div class="modal-wrap" id="feedbackDlg" hidden>
+  <form class="modal fb-modal fb-modal-sm" role="dialog" aria-modal="true" aria-labelledby="feedbackTitle" id="feedbackForm" novalidate>
+    <div class="modal-head">
+      <h2 id="feedbackTitle">Feedback</h2>
+      <button type="button" class="icon-btn" data-close aria-label="Close feedback"><svg class="ic"><use href="#i-close"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <label class="fb-label" for="feedbackText">What would you add or change on this site?</label>
+      <textarea class="fb-text" id="feedbackText" rows="6" maxlength="2000" placeholder="Ideas for new simulations, things that confused you, bugs…"></textarea>
+      <p class="fb-status" id="feedbackStatus" role="status" aria-live="polite"></p>
+    </div>
+    <div class="modal-foot">
+      <span class="foot-info" id="feedbackCount">0 / 2000</span>
+      <div class="foot-btns">
+        <button type="button" class="btn" data-close>Cancel</button>
+        <button type="submit" class="btn primary" id="feedbackSend">Send</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class="modal-wrap" id="adminDlg" hidden>
+  <div class="modal fb-modal" role="dialog" aria-modal="true" aria-labelledby="adminTitle">
+    <div class="modal-head">
+      <h2 id="adminTitle">Feedback inbox</h2>
+      <button type="button" class="icon-btn" data-close aria-label="Close admin"><svg class="ic"><use href="#i-close"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <form class="adm-login" id="adminForm">
+        <label class="fb-label" for="adminPass">Password</label>
+        <div class="adm-row">
+          <input class="fb-input" id="adminPass" type="password" autocomplete="current-password" required>
+          <button type="submit" class="btn primary">Log in</button>
+        </div>
+      </form>
+      <p class="fb-status" id="adminStatus" role="status" aria-live="polite"></p>
+      <ol class="adm-list" id="adminList" hidden></ol>
+    </div>
+    <div class="modal-foot" id="adminFoot" hidden>
+      <span class="foot-info" id="adminCount"></span>
+      <div class="foot-btns">
+        <button type="button" class="btn" id="adminRefresh">Refresh</button>
+        <button type="button" class="btn" id="adminLogout">Log out</button>
       </div>
     </div>
   </div>
@@ -4582,6 +4678,131 @@ function init() {
   requestAnimationFrame((t) => { lastNow = t; frame(t); });
 }
 init();
+
+
+// ============================================================================
+//  Feedback form and admin inbox (backed by /api/feedback and /api/admin)
+// ============================================================================
+(() => {
+  const el = (id) => document.getElementById(id);
+
+  // Small dialog helper: Escape and backdrop close, focus returns to the opener, Tab stays inside.
+  function dialog(wrap, onOpen) {
+    let opener = null;
+    const close = () => { wrap.hidden = true; if (opener && opener.focus) opener.focus(); };
+    wrap.querySelectorAll('[data-close]').forEach((b) => b.addEventListener('click', close));
+    wrap.addEventListener('mousedown', (e) => { if (e.target === wrap) close(); });
+    wrap.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') { e.preventDefault(); close(); return; }
+      if (e.key !== 'Tab') return;
+      const f = [...wrap.querySelectorAll('button,input,textarea,a[href]')].filter((x) => !x.disabled && x.offsetParent !== null);
+      if (!f.length) return;
+      const first = f[0], last = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    });
+    return { open() { opener = document.activeElement; wrap.hidden = false; onOpen(); }, close };
+  }
+
+  function setStatus(node, text, kind) { node.textContent = text; if (kind) node.dataset.kind = kind; else delete node.dataset.kind; }
+
+  async function post(url, body) {
+    const res = await fetch(url, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body) });
+    let data = {};
+    try { data = await res.json(); } catch { /* non-JSON error page */ }
+    if (!res.ok) throw Object.assign(new Error(data.error || 'Something went wrong. Please try again.'), { status: res.status });
+    return data;
+  }
+
+  // ---------- Feedback form ----------
+  const fbText = el('feedbackText'), fbStatus = el('feedbackStatus'), fbSend = el('feedbackSend'), fbCount = el('feedbackCount');
+  const fb = dialog(el('feedbackDlg'), () => { setStatus(fbStatus, ''); fbText.focus(); });
+  el('openFeedback').addEventListener('click', fb.open);
+  fbText.addEventListener('input', () => { fbCount.textContent = `${fbText.value.length} / 2000`; });
+  el('feedbackForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const message = fbText.value.trim();
+    if (!message) { setStatus(fbStatus, 'Please write something first.', 'err'); fbText.focus(); return; }
+    fbSend.disabled = true;
+    setStatus(fbStatus, 'Sending…');
+    try {
+      await post('/api/feedback', { message, page: location.hash || '#/' });
+      fbText.value = '';
+      fbCount.textContent = '0 / 2000';
+      setStatus(fbStatus, 'Thank you! Your feedback was sent.', 'ok');
+      setTimeout(() => { if (fbStatus.dataset.kind === 'ok') fb.close(); }, 1600);
+    } catch (err) {
+      setStatus(fbStatus, err.message, 'err');
+    } finally {
+      fbSend.disabled = false;
+    }
+  });
+
+  // ---------- Admin inbox ----------
+  // The password is kept only in memory for this page view and checked by the server on every request.
+  let adminPass = '';
+  const admForm = el('adminForm'), admPass = el('adminPass'), admStatus = el('adminStatus'), admList = el('adminList');
+  const admFoot = el('adminFoot'), admCount = el('adminCount');
+  const adm = dialog(el('adminDlg'), () => { (adminPass ? el('adminRefresh') : admPass).focus(); });
+  el('adminLink').addEventListener('click', (e) => { e.preventDefault(); adm.open(); });
+
+  function showLoggedIn(on) {
+    admForm.hidden = on;
+    admList.hidden = !on;
+    admFoot.hidden = !on;
+  }
+
+  function render(items) {
+    admList.replaceChildren(...items.map((it) => {
+      const li = document.createElement('li');
+      li.className = 'adm-item';
+      const meta = document.createElement('div');
+      meta.className = 'adm-meta';
+      const when = document.createElement('span');
+      when.textContent = new Date(it.at).toLocaleString() + (it.page ? ` · ${it.page}` : '');
+      const del = document.createElement('button');
+      del.type = 'button';
+      del.className = 'adm-del';
+      del.textContent = 'Delete';
+      del.addEventListener('click', () => load({ remove: it.id }));
+      meta.append(when, del);
+      const msg = document.createElement('p');
+      msg.className = 'adm-msg';
+      msg.textContent = it.message;
+      li.append(meta, msg);
+      return li;
+    }));
+    admCount.textContent = items.length === 1 ? '1 message' : `${items.length} messages`;
+    setStatus(admStatus, items.length ? '' : 'No feedback yet.');
+  }
+
+  async function load(extra = {}) {
+    setStatus(admStatus, 'Loading…');
+    try {
+      const { items } = await post('/api/admin', { password: adminPass, ...extra });
+      showLoggedIn(true);
+      render(items);
+    } catch (err) {
+      if (err.status === 401) { adminPass = ''; showLoggedIn(false); admPass.focus(); }
+      setStatus(admStatus, err.message, 'err');
+    }
+  }
+
+  admForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    adminPass = admPass.value;
+    admPass.value = '';
+    load();
+  });
+  el('adminRefresh').addEventListener('click', () => load());
+  el('adminLogout').addEventListener('click', () => {
+    adminPass = '';
+    admList.replaceChildren();
+    showLoggedIn(false);
+    setStatus(admStatus, '');
+    admPass.focus();
+  });
+})();
 
 </script>
 </body>

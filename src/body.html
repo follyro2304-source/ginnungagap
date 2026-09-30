@@ -16,6 +16,9 @@
     <!-- Grid lines sagging into a gravity well beneath a small mass -->
     <symbol id="i-space" viewBox="0 0 24 24"><path d="M2.5 9.5c3.2 0 5.3.5 6.7 2.3 1 1.3 1.7 3 2.8 3s1.8-1.7 2.8-3c1.4-1.8 3.5-2.3 6.7-2.3"/><path d="M2.5 15c3 0 5 .3 6.4 1.2 1.1.7 2 1.5 3.1 1.5s2-.8 3.1-1.5c1.4-.9 3.4-1.2 6.4-1.2"/><path d="M8.2 20.5c.5-3 1.6-5.7 3.8-5.7s3.3 2.7 3.8 5.7"/><circle cx="12" cy="6" r="2.1" fill="currentColor" stroke="none"/></symbol>
     <symbol id="i-swap" viewBox="0 0 24 24"><path d="M5 8.5h13.5M15 5l3.5 3.5L15 12"/><path d="M19 15.5H5.5M9 12l-3.5 3.5L9 19"/></symbol>
+    <!-- Speech bubble with a quill stroke -->
+    <symbol id="i-feedback" viewBox="0 0 24 24"><path d="M4.5 5.5h15a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H10l-4.5 3.5v-3.5h-1a1 1 0 0 1-1-1v-9a1 1 0 0 1 1-1Z"/><path d="M8 10h8M8 13h5"/></symbol>
+    <symbol id="i-github" viewBox="0 0 16 16"><path fill="currentColor" stroke="none" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></symbol>
   </defs>
 </svg>
 
@@ -62,6 +65,7 @@
           <p>The name fits. Just outside the horizon, gas in the disk reaches millions of kelvin, while the horizon itself radiates at about 60 billionths of a kelvin for a black hole of one solar mass. Fire and ice, at the edge of a void.</p>
           <div class="cta-row"><a class="cta" href="#/black-hole"><svg class="ic"><use href="#i-bh"/></svg>Open the black hole simulation</a><a class="cta cta-rime" href="#/spacetime"><svg class="ic"><use href="#i-space"/></svg>Explore spacetime around Earth</a></div>
         </div>
+        <p class="home-admin"><a href="#" id="adminLink">Admin</a></p>
       </div>
     </div>
   </div>
@@ -340,6 +344,60 @@
       <div class="foot-btns">
         <button class="btn" id="resetGfx">Use recommended</button>
         <button class="btn primary" id="doneSettings">Done</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== Feedback ===================== -->
+<div class="fab-stack" id="fabStack">
+  <a class="fab" href="https://github.com/follyro2304-source/ginnungagap" target="_blank" rel="noopener" aria-label="Source code on GitHub"><svg class="ic"><use href="#i-github"/></svg><span class="tip">View on GitHub</span></a>
+  <button class="fab" id="openFeedback" aria-haspopup="dialog" aria-label="Send feedback"><svg class="ic"><use href="#i-feedback"/></svg><span class="tip">Send feedback</span></button>
+</div>
+
+<div class="modal-wrap" id="feedbackDlg" hidden>
+  <form class="modal fb-modal fb-modal-sm" role="dialog" aria-modal="true" aria-labelledby="feedbackTitle" id="feedbackForm" novalidate>
+    <div class="modal-head">
+      <h2 id="feedbackTitle">Feedback</h2>
+      <button type="button" class="icon-btn" data-close aria-label="Close feedback"><svg class="ic"><use href="#i-close"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <label class="fb-label" for="feedbackText">What would you add or change on this site?</label>
+      <textarea class="fb-text" id="feedbackText" rows="6" maxlength="2000" placeholder="Ideas for new simulations, things that confused you, bugs…"></textarea>
+      <p class="fb-status" id="feedbackStatus" role="status" aria-live="polite"></p>
+    </div>
+    <div class="modal-foot">
+      <span class="foot-info" id="feedbackCount">0 / 2000</span>
+      <div class="foot-btns">
+        <button type="button" class="btn" data-close>Cancel</button>
+        <button type="submit" class="btn primary" id="feedbackSend">Send</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class="modal-wrap" id="adminDlg" hidden>
+  <div class="modal fb-modal" role="dialog" aria-modal="true" aria-labelledby="adminTitle">
+    <div class="modal-head">
+      <h2 id="adminTitle">Feedback inbox</h2>
+      <button type="button" class="icon-btn" data-close aria-label="Close admin"><svg class="ic"><use href="#i-close"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <form class="adm-login" id="adminForm">
+        <label class="fb-label" for="adminPass">Password</label>
+        <div class="adm-row">
+          <input class="fb-input" id="adminPass" type="password" autocomplete="current-password" required>
+          <button type="submit" class="btn primary">Log in</button>
+        </div>
+      </form>
+      <p class="fb-status" id="adminStatus" role="status" aria-live="polite"></p>
+      <ol class="adm-list" id="adminList" hidden></ol>
+    </div>
+    <div class="modal-foot" id="adminFoot" hidden>
+      <span class="foot-info" id="adminCount"></span>
+      <div class="foot-btns">
+        <button type="button" class="btn" id="adminRefresh">Refresh</button>
+        <button type="button" class="btn" id="adminLogout">Log out</button>
       </div>
     </div>
   </div>

@@ -4,7 +4,7 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 S = ROOT / 'src'
 css = (S/'style.css').read_text()
 body = (S/'body.html').read_text()
-js = '\n'.join((S/f).read_text() for f in ['physics.js','shaders.js','renderer.js','app1.js','space_data.js','space_sim.js','space_shaders.js','space_render.js','space_ui.js','app2.js'])
+js = '\n'.join((S/f).read_text() for f in ['physics.js','shaders.js','renderer.js','app1.js','space_data.js','space_sim.js','space_shaders.js','space_render.js','space_ui.js','app2.js','feedback.js'])
 import base64
 T = ROOT / 'textures'
 def uri(name, mime):
